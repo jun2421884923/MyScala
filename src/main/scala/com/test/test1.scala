@@ -1,3 +1,5 @@
+package com.test
+
 import org.apache.spark.{SparkConf, SparkContext}
 
 object test1 {
@@ -8,7 +10,7 @@ object test1 {
       val conf = new SparkConf().setAppName("WordCount").setMaster("local");
 
       val sc = new SparkContext(conf)
-      val logData = sc.textFile(logFile, 2).cache()
+      val logData = sc.textFile(logFile).cache()
       val numAs = logData.filter(line => line.contains("p")).count()
       val numBs = logData.filter(line => line.contains("h")).count()
       println("Lines with a: %s, Lines with b: %s".format(numAs, numBs))

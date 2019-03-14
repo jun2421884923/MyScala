@@ -1,5 +1,6 @@
-import org.apache.spark.SparkConf
-import org.apache.spark.SparkContext
+package com.test
+
+import org.apache.spark.{SparkConf, SparkContext}
 
 object WordCount {
   def main(args: Array[String]) {

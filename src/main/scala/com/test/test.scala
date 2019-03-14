@@ -1,3 +1,5 @@
+package com.test
+
 import org.apache.spark.{SparkConf, SparkContext}
 //:::三个冒号运算符表示List的连接操作。(类似于Java中的 list1.addAll(list2))
 //::两个冒号运算符表示普通元素与list的连接操作。(类似于Java中的list1.add(A)操作)

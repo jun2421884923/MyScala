@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="servers" value="192.168">text</property>
+    <property name="enable_auto_commit" value="true"></property>
+    <property name="auto_commit_interval_ms" value="1000"></property>
+    <!-- db -->
+    <property name="sername" value="v"></property>
+    <property name="word" value="Ci4"></property>
+    <property name="url" value="jdbc:mysql:/"></property>
+
+</configuration>
