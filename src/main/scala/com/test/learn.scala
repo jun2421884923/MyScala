@@ -18,24 +18,25 @@ res4: Option[Int] = Some(3)
   * takeWhile 返回的结果就是集合中前N个连续满足条件的元素
   * scala> List(1, 2, 3, -4, 5, 6, 7, 8, 9, 10) takeWhile (_ > 0)
 res5: List[Int] = List(1, 2, 3)
-  flatMap对于嵌套的集合（即集合中的元素还是集合），如果我们希望把每一个嵌套的子集“转换”成一个新的子集
+--  flatMap对于嵌套的集合（即集合中的元素还是集合），如果我们希望把每一个嵌套的子集“转换”成一个新的子集
   scala> List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)) flatMap (_.toList)
 res2: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
 
-  flatten将所有嵌套的集合的元素一一取出逐一放置到一个集合中≈flatMap
+--  flatten将所有嵌套的集合的元素一一取出逐一放置到一个集合中≈flatMap
   scala> List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9)).flatten
 res12: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
-fold() 和reduce()类似，但是他可以设置初始值
+--fold() 和reduce()类似，但是他可以设置初始值
   sum = rdd.reduce(lambda x, y: x + y)
   num.fold(0,lambda x,y:x+y)
 
-  union():生成一个包含两个RDD中的所有元素的RDD
-intersection（）：求两个RDD共同元素的RDD
-subtract():移除一个RDD中的内容，例如移除 训练数据，rdd.subtract(other)
-cartesian():与另一个 RDD的笛卡尔积；rdd.cartesian(other)
+--  union():生成一个包含两个RDD中的所有元素的RDD
+--intersection（）：求两个RDD共同元素的RDD
+--subtract():移除一个RDD中的内容，例如移除 训练数据，rdd.subtract(other)
+--cartesian():与另一个 RDD的笛卡尔积；rdd.cartesian(other)
+
 
   */
-object test {
+object learn {
   /**
     * println( factorial(2) )阶乘
     * @param i
@@ -123,10 +124,23 @@ case s: String if s(0) == 'a' => ..
     arr1(3) = (3,1)
     arr1(4) = (10,1)
     val rddA = sc.parallelize(arr1.filter(_ != null).map{case (n1,n2)=>(n1,n2)})
-    rddA.groupByKey().foreach(println)
+    rddA.groupByKey().mapValues(x=>x.max).foreach(println)
+  }
+  def flatMap(): Unit ={
+    val abcd = Seq('a', 'b', 'c', 'd')
+
+    //List(A, a, B, b, C, c, D, d)
+    abcd.flatMap(ch => List(ch.toUpper, ch)).foreach(println)
+  }
+  def coalesce_test(): Unit ={
+      var input=sc.textFile("")
+      var partitions=input.getNumPartitions  //获取rdd分区，并行度
+      var newpar=input.coalesce(5).cache()
+
+
   }
   def main(args: Array[String]):Unit= {
-    joinRdd()
+    groupby()
 //    println(List.range(1, 11).partition(_ % 3 == 0)._1)
 //    var t= List(1, 2, 3, 4, 5).map(_ + 1)
 //    println(t)

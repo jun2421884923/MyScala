@@ -17,15 +17,18 @@ object LogEtl {
     if(output_path.contains("file")){
       local_output_path=output_path.toLowerCase.replace("file:","")
     }
-    val bool = DeleteFolder(local_output_path)
-    if(! bool){
-      println("输出目录删除fail")
-      sys.exit(1)
+    if (!output_path.contains("bos") && !output_path.contains("hdfs")){
+      val bool = DeleteFolder(local_output_path)
+      if(! bool){
+        println("输出目录删除fail")
+        sys.exit(1)
+      }
     }
+
     println("input_path="+input_path)
     println("output_path="+output_path)
 
-    val conf = new SparkConf().setAppName("LogEtl").setMaster("local");
+    val conf = new SparkConf().setAppName("LogEtl");
     val sc = new SparkContext(conf)
     val logData = sc.textFile(input_path).cache()
     println("start take")
